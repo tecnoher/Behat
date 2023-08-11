@@ -89,8 +89,6 @@ final class JUnitScenarioPrinter
             'time'      => $this->durationListener ? $this->durationListener->getDuration($scenario) : '',
         ), $feature, $scenario);
 
-        $outputPrinter->addTestcase($testCaseAttributes);
-
         if ($file) {
             $cwd = realpath(getcwd());
             $testCaseAttributes['file'] =

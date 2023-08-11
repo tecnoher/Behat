@@ -110,6 +110,9 @@ final class JUnitOutputPrinter extends StreamOutputPrinter
         $childNode = $this->domDocument->createElement($nodeName, $nodeValue ?? '');
         $this->currentTestcase->appendChild($childNode);
         $this->addAttributesToNode($childNode, $nodeAttributes);
+        if ($nodeName === 'failure' && isset($nodeAttributes['line'])) {
+            $childNode->setAttribute('line', $nodeAttributes['line']);
+        }
     }
 
     private function addAttributesToNode(\DOMElement $node, array $attributes)
