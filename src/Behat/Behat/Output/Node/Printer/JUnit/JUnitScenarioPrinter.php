@@ -87,10 +87,7 @@ final class JUnitScenarioPrinter
             'classname' => "[Node #$this->circleCiNode] " . $feature->getTitle(),
             'status'    => $this->resultConverter->convertResultToString($result),
             'time'      => $this->durationListener ? $this->durationListener->getDuration($scenario) : '',
-            'line'      => $scenario->getLine(),
         ), $feature, $scenario);
-
-        $outputPrinter->addTestcase($testCaseAttributes);
 
         if ($file) {
             $cwd = realpath(getcwd());
@@ -135,6 +132,7 @@ final class JUnitScenarioPrinter
         if ($this->circleCiNode !== false) {
             $attributes['name'] = "[Node #$this->circleCiNode] {$attributes['name']}";
             $attributes['file'] = $this->appendLineNumberToPath($this->convertToRelativePath($feature->getFile()), $scenario->getLine());
+            $attributes['line'] = $scenario->getLine();
         }
 
         return $attributes;
