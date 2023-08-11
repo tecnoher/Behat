@@ -14,6 +14,8 @@
         <xs:complexType mixed="true">
             <xs:attribute name="type" type="xs:string" use="optional"/>
             <xs:attribute name="message" type="xs:string" use="optional"/>
+            <xs:attribute name="file" type="xs:string" use="optional"/>
+            <xs:attribute name="line" type="xs:string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
