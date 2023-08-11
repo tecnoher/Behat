@@ -84,10 +84,13 @@ final class JUnitScenarioPrinter
 
         $testCaseAttributes = $this->addCircleCiAttributes(array(
             'name'      => $name,
-            'classname' => $feature->getTitle(),
+            'classname' => "[Node #$this->circleCiNode] " . $feature->getTitle(),
             'status'    => $this->resultConverter->convertResultToString($result),
-            'time'      => $this->durationListener ? $this->durationListener->getDuration($scenario) : ''
+            'time'      => $this->durationListener ? $this->durationListener->getDuration($scenario) : '',
+            'line'      => $scenario->getLine(),
         ), $feature, $scenario);
+
+        $outputPrinter->addTestcase($testCaseAttributes);
 
         if ($file) {
             $cwd = realpath(getcwd());
