@@ -83,7 +83,7 @@ final class JUnitScenarioPrinter
         $outputPrinter = $formatter->getOutputPrinter();
 
         $testCaseAttributes = $this->addCircleCiAttributes(array(
-            'name'      => $name,
+            'className'      => $name,
             'status'    => $this->resultConverter->convertResultToString($result),
             'time'      => $this->durationListener ? $this->durationListener->getDuration($scenario) : '',
         ), $feature, $scenario);
@@ -129,8 +129,9 @@ final class JUnitScenarioPrinter
      */
     private function addCircleCiAttributes(array $attributes, FeatureNode $feature, ScenarioLikeInterface $scenario) {
         if ($this->circleCiNode !== false) {
-            $attributes['className'] = "{$attributes['name']}";
+            $attributes['name'] = "[Node #$this->circleCiNode] " . $feature->getTitle();
             $attributes['file'] = $this->appendLineNumberToPath($this->convertToRelativePath($feature->getFile()), $scenario->getLine());
+            $attributes['line'] = $scenario->getLine();
         }
 
         return $attributes;
