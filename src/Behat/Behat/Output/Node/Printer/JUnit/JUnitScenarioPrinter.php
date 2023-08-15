@@ -108,7 +108,7 @@ final class JUnitScenarioPrinter
      * @return string
      */
     private function appendLineNumberToPath(string $path, int $lineNumber) {
-        return "$path:$lineNumber";
+        return "$path=$lineNumber";
     }
 
     /**
@@ -129,7 +129,8 @@ final class JUnitScenarioPrinter
      */
     private function addCircleCiAttributes(array $attributes, FeatureNode $feature, ScenarioLikeInterface $scenario) {
         if ($this->circleCiNode !== false) {
-            $attributes['classname'] = "[Node #$this->circleCiNode] " . $feature->getTitle();
+            $attributes['classname'] = $feature->getTitle();
+            $attributes['circleCiNode'] = $this->circleCiNode;
             $attributes['file'] = $this->appendLineNumberToPath($this->convertToRelativePath($feature->getFile()), $scenario->getLine());
             $attributes['line'] = $scenario->getLine();
         }
